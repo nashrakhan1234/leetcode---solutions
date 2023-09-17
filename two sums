@@ -1,0 +1,85 @@
+Two sums 
+code in python and c++
+using hashmap
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+
+class Solution {
+public:
+    std::vector<int> twoSum(std::vector<int>& nums, int target) {
+        std::unordered_map<int, int> num_indices; // Map to store numbers and their indices
+        
+        for (int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+            
+            // Check if the complement is in the map
+            if (num_indices.find(complement) != num_indices.end()) {
+                return {num_indices[complement], i};
+            }
+            
+            // If not found, store the current number and its index in the map
+            num_indices[nums[i]] = i;
+        }
+        
+        // If no solution is found, return an empty vector or handle the case as needed
+        return {};
+    }
+};
+
+
+code explanation -
+the code is done using map function that will improve the time complexity 
+example explanation - 
+Let's use the provided example nums = [2, 7, 11, 15] and target = 9 to see how the code works:
+
+In the first iteration of the loop, i is 0, and the current number is 2. The complement is 9 - 2 = 7. The code adds 2 to the num_indices map with an index of 0.
+
+In the second iteration of the loop, i is 1, and the current number is 7. The complement is 9 - 7 = 2. The code checks if 2 is in the num_indices map, and indeed it is because it was added 
+in the previous iteration. 
+So, the code returns the indices [0, 1], which represent the positions of the numbers 2 and 7 in the original array.
+
+The final result is [0, 1], indicating that the pair of numbers [2, 7] adds up to the target 9.
+
+
+The time complexity of the given code is O(n)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+using brute force method
+python-
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        # Loop through the list of numbers
+        for i in range(len(nums)):
+            # Loop through the remaining numbers in the list
+            for j in range(i + 1, len(nums)):
+                # Check if the pair of numbers adds up to the target
+                if nums[i] + nums[j] == target:
+                    return [i, j]
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+c++
+class Solution {
+public:
+    std::vector<int> twoSum(std::vector<int>& nums, int target) {
+        // Loop through the list of numbers
+        for (int i = 0; i < nums.size(); i++) {
+            // Loop through the remaining numbers in the list
+            for (int j = i + 1; j < nums.size(); j++) {
+                // Check if the pair of numbers adds up to the target
+                if (nums[i] + nums[j] == target) {
+                    return {i, j};
+                }
+            }
+        }
+        // If no solution is found, return an empty vector or handle the case as needed
+        return {};
+    }
+};
